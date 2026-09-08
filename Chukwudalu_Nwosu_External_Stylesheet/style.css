@@ -1,0 +1,183 @@
+/* CSS HEX
+--black: #000000ff;
+--golden-bronze: #d5ac4eff;
+--sapphire: #034db5ff;
+--pale-slate: #c8ccd0ff;
+--brick-ember: #c20114ff;
+*/
+
+:root {
+  --black: #000000ff;
+  --golden-bronze: #d5ac4eff;
+  --sapphire: #034db5ff;
+  --pale-slate: #c8ccd0ff;
+  --brick-ember: #c20114ff;
+
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--pale-slate);
+  color: var(--black);
+  font-family: var(--font-body);
+  line-height: 1.7;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2.5rem;
+  background-color: var(--black);
+}
+
+
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--golden-bronze);
+  letter-spacing: 0.5px;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.site-header nav a {
+  color: var(--pale-slate);
+  font-weight: 500;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.site-header nav a:hover,
+.site-header nav a.active {
+  color: var(--golden-bronze);
+  border-bottom-color: var(--golden-bronze);
+}
+
+/* ---------- Hero / photo ---------- */
+
+.about-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 4rem;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* Sizing for my profile photo */
+.hero-photo {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--golden-bronze);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  transform: scale(1.15);
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  color: var(--sapphire);
+  margin-bottom: 0.4rem;
+}
+
+.hero .tagline {
+  font-style: italic;
+  color: var(--brick-ember);
+  font-weight: 500;
+}
+
+/* ---------- Story ---------- */
+
+.story {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem 2.25rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.story p {
+  margin-bottom: 1.1rem;
+}
+
+.story p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Connect / social ---------- */
+
+.connect {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.connect h2 {
+  font-family: var(--font-heading);
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: var(--sapphire);
+  color: #ffffff;
+  font-weight: 500;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.social-link:hover {
+  background-color: var(--brick-ember);
+  transform: translateY(-2px);
+}
+
+/* Sizing for the LinkedIn icon png*/
+.social-icon {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: var(--black);
+  color: var(--pale-slate);
+  font-size: 0.85rem;
+}
