@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata: defines text encoding, mobile scaling, page title, and shared CSS. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liverpool FC Fan Site | Current Squad</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main container: groups all visible squad-page content. -->
+    <main class="page-container">
+        <!-- Header: introduces the current men's first team. -->
+        <header>
+            <img src="images/Liverpool Logo.png"
+            alt="Liverpool FC logo"
+            style="width: 90px; height: auto;">
+            <p class="eyebrow">THE REDS</p>
+            <h1>Current Squad</h1>
+            <p>Liverpool FC men's first-team players</p>
+        </header>
+
+        <!-- Navigation: relative links connect all three local HTML pages. -->
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a><br>
+            <a href="squad.html">Current Squad</a><br>
+            <a href="history.html">Trophy Cabinet &amp; History</a>
+        </nav>
+
+        <!-- Image: loads an associated picture from the local images folder. -->
+        <img class="page-image" src="./images/Liverpool Squad Picture 25.webp" alt="Football players in red training together on a field"  style="width: 100%; height: auto; display: block;">
+
+        <!-- Main text: each paragraph has a different CSS class and appearance. -->
+        <section aria-labelledby="team-title">
+            <h2 id="team-title">The Team Today</h2>
+            <p class="paragraph-one">Liverpool's first team brings together experienced leaders, creative midfielders, quick attackers, and younger players developing at the highest level. The squad competes in English and European football throughout the season.</p>
+            <p class="paragraph-two">Virgil van Dijk provides leadership in defence, while players such as Alexis Mac Allister, Dominik Szoboszlai, Ryan Gravenberch, and Florian Wirtz offer different qualities in midfield.</p>
+            <p class="paragraph-three">The attacking group includes players such as Alexander Isak, Cody Gakpo, Hugo Ekitike, and Federico Chiesa. Squad membership changes through transfers and academy promotions. (The squad picture for this season isn't out yet so this is for last season)</p>
+        </section>
+
+        <!-- Bulleted list: organizes selected squad members by position. -->
+        <section aria-labelledby="players-title">
+            <h2 id="players-title">Selected First-Team Players</h2>
+            <ul class="highlights">
+                <li><strong>Goalkeepers:</strong> Alisson Becker, Giorgi Mamardashvili, Freddie Woodman</li>
+                <li><strong>Defenders:</strong> Virgil van Dijk, Jeremy Jacquet, Joe Gomez, Milos Kerkez, Jeremie Frimpong, Conor Bradley</li>
+                <li><strong>Midfielders:</strong> Alexis Mac Allister, Dominik Szoboszlai, Ryan Gravenberch, Wataru Endo, Florian Wirtz</li>
+                <li><strong>Forwards:</strong> Alexander Isak, Victor Munoz, Cody Gakpo, Hugo Ekitike, Federico Chiesa, Rio Ngumoha, Bradley Barcola</li>
+            </ul>
+        </section>
+
+        <!-- Footer: gives date context for information that can change. -->
+        <footer>Squad information checked against Liverpool FC sources in September 2026</footer>
+    </main>
+</body>
+</html>

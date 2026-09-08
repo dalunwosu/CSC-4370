@@ -1,0 +1,130 @@
+/* Page setup: creates the dark background and readable default typography. */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #111111, #2a0508);
+    color: #262626;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.65;
+}
+
+/* Main layout: centers the content and places it on a bright card. */
+.page-container {
+    width: min(920px, 92%);
+    margin: 32px auto;
+    padding: 32px;
+    background: #ffffff;
+    border-top: 8px solid #c8102e;
+    border-radius: 14px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Header: uses Liverpool-inspired red, white, and gold colors. */
+header {
+    padding: 28px 20px;
+    color: white;
+    text-align: center;
+    background: linear-gradient(120deg, #9d0b23, #c8102e);
+    border-radius: 10px;
+    border-bottom: 4px solid #f6c344;
+}
+header h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+}
+header p { margin: 6px 0 0; }
+.eyebrow {
+    color: #f6c344;
+    font-size: 0.82rem;
+    font-weight: bold;
+    letter-spacing: 0.22em;
+}
+
+/* Navigation: styles the relative links separated with br tags. */
+nav {
+    margin: 20px 0;
+    padding: 14px;
+    text-align: center;
+    background: #171717;
+    border-radius: 9px;
+}
+nav a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+nav a:hover {
+    color: #f6c344;
+    text-decoration: underline;
+}
+
+/* Images: keeps each associated local picture responsive. */
+.page-image {
+    display: block;
+    width: 100%;
+    height: 360px;
+    margin: 22px 0;
+    object-fit: cover;
+    border: 5px solid #c8102e;
+    border-radius: 12px;
+}
+
+/* Paragraph styles: each changes font, color, background, and border. */
+.paragraph-one {
+    padding: 17px;
+    color: #7d0c20;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.08rem;
+    background: #fff0f2;
+    border-left: 6px solid #c8102e;
+}
+.paragraph-two {
+    padding: 17px;
+    color: #634a00;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 1rem;
+    font-style: italic;
+    background: #fff7dc;
+    border-radius: 12px;
+}
+.paragraph-three {
+    padding: 17px;
+    color: #ffffff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.97rem;
+    font-weight: bold;
+    background: #202020;
+    border: 2px dashed #f6c344;
+}
+
+/* List: formats the selected squad members. */
+.highlights {
+    padding: 20px 20px 20px 44px;
+    background: #fff1f3;
+    border: 1px solid #e9a1ad;
+    border-radius: 10px;
+}
+.highlights li { margin-bottom: 8px; }
+
+/* Table: gives the trophy cabinet clear rows and columns. */
+table { width: 100%; margin-top: 14px; border-collapse: collapse; }
+th, td { padding: 12px; border: 1px solid #b9b9b9; text-align: left; }
+th { color: white; background: #c8102e; }
+tr:nth-child(even) { background: #f5f5f5; }
+
+/* Footer: separates the final note from the main content. */
+footer {
+    margin-top: 28px;
+    padding-top: 16px;
+    color: #666666;
+    text-align: center;
+    border-top: 1px solid #cccccc;
+}
+
+/* Mobile layout: reduces padding, image height, and table text size. */
+@media (max-width: 600px) {
+    .page-container { padding: 17px; }
+    .page-image { height: 230px; }
+    th, td { padding: 8px; font-size: 0.88rem; }
+}

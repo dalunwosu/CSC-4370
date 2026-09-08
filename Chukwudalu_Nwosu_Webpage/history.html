@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata: defines text encoding, mobile scaling, page title, and shared CSS. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liverpool FC Fan Site | Trophy Cabinet &amp; History</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main container: groups all visible history-page content. -->
+    <main class="page-container">
+        <!-- Header: introduces Liverpool's history and honours. -->
+        <header>
+            <img src="images/Liverpool Logo.png"
+            alt="Liverpool FC logo"
+            style="width: 90px; height: auto;">
+            <p class="eyebrow">RED HISTORY</p>
+            <h1>Trophy Cabinet &amp; History</h1>
+            <p>More than a century of major moments</p>
+        </header>
+
+        <!-- Navigation: relative links connect all three local HTML pages. -->
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a><br>
+            <a href="squad.html">Current Squad</a><br>
+            <a href="history.html">Trophy Cabinet &amp; History</a>
+        </nav>
+
+        <!-- Image: loads an associated picture from the local images folder. -->
+        <img class="page-image" src="images\Liverpool Champions Wall.webp" alt="Liverpoool's Wall of Champions"  style="width: 100%; height: auto; display: block;">
+
+        <!-- Main text: each paragraph has a different CSS class and appearance. -->
+        <section aria-labelledby="history-title">
+            <h2 id="history-title">Built Through Generations</h2>
+            <p class="paragraph-one">Liverpool FC began in 1892 and gradually became one of England's leading clubs. Bill Shankly's arrival in 1959 helped transform the team, establish a winning culture, and begin a new era at Anfield.</p>
+            <p class="paragraph-two">Success continued under managers such as Bob Paisley, Joe Fagan, Kenny Dalglish, Rafael Benítez, and Jürgen Klopp. Their teams produced league triumphs, domestic cups, and famous European victories.</p>
+            <p class="paragraph-three">Liverpool's official honours list now records 52 major men's trophies. That total includes a record-equalling 20 English league titles and six European Cups, the most won by a British club.</p>
+        </section>
+
+        <!-- Table: summarizes the club's major men's trophies and totals. -->
+        <section aria-labelledby="cabinet-title">
+            <h2 id="cabinet-title">Major Men's Honours</h2>
+            <table>
+                <thead><tr><th>Trophy</th><th>Titles</th><th>Most Recent Win</th></tr></thead>
+                <tbody>
+                    <tr><td>English League</td><td>20</td><td>2024-25</td></tr>
+                    <tr><td>European Cup / Champions League</td><td>6</td><td>2018-19</td></tr>
+                    <tr><td>FA Cup</td><td>8</td><td>2021-22</td></tr>
+                    <tr><td>League Cup</td><td>10</td><td>2023-24</td></tr>
+                    <tr><td>UEFA Cup</td><td>3</td><td>2000-01</td></tr>
+                    <tr><td>UEFA Super Cup</td><td>4</td><td>2019</td></tr>
+                    <tr><td>FIFA Club World Cup</td><td>1</td><td>2019</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Footer: identifies the source used for the honours totals. -->
+        <footer>Honours totals checked against Liverpool FC's official history pages</footer>
+    </main>
+</body>
+</html>
