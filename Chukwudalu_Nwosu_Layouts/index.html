@@ -1,25 +1,49 @@
 <!DOCTYPE html>
+<!-- ShopSmart | About page
+     Includes a light/dark theme toggle (see style.css for the theme variables
+     and script.js for the toggle logic). -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | ShopSmart</title>
+
+  <!-- Google Fonts: Poppins (headings) and Inter (body text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- External stylesheet: layout, color palette, and light/dark theme variables -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Theme script is loaded in the <head> (no defer) so the saved theme is applied
+       before the page paints. This prevents a flash of the wrong theme on reload. -->
+  <script src="script.js"></script>
 </head>
 <body>
 
+  <!-- ========== Top navbar: brand, page links, and theme toggle ========== -->
   <header class="top-nav">
     <span class="brand-name">ShopSmart</span>
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-    </nav>
+
+    <div class="nav-actions">
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+
+      <!-- Theme toggle button. script.js swaps the icon, aria-label, and aria-pressed
+           state when it is clicked. -->
+      <button id="theme-toggle" class="theme-toggle" type="button"
+              aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
   </header>
 
+  <!-- ========== Page layout: contents sidebar (left) + main content (right) ========== -->
   <div class="layout">
 
+    <!-- "On This Page" outline: anchor links that jump to each section below -->
     <aside class="contents-sidebar">
       <h3>On This Page</h3>
       <nav class="contents-nav">
@@ -31,14 +55,16 @@
 
     <main class="content">
 
+      <!-- Hero: founder photo, page title, and tagline -->
       <section class="hero">
         <div class="hero-photo">
-          <img src="./images/Founder_Picture.JPG" alt="Dalu Nwosu" class="profile-img">
+          <img src="./images/Founder_Picture.jpg" alt="Dalu Nwosu" class="profile-img">
         </div>
         <h1>About ShopSmart</h1>
         <p class="tagline">Know before you go.</p>
       </section>
 
+      <!-- Section 1: what the app does -->
       <section id="functionality" class="story-block">
         <h2>What ShopSmart Does</h2>
         <p>
@@ -54,6 +80,7 @@
         </p>
       </section>
 
+      <!-- Section 2: why it was created -->
       <section id="our-story" class="story-block">
         <h2>Our Story</h2>
         <p>
@@ -69,6 +96,7 @@
         </p>
       </section>
 
+      <!-- Section 3: social link -->
       <section id="connect" class="connect">
         <h2>Let's Connect</h2>
         <a href="https://www.linkedin.com/in/chukwudalunwosu/" target="_blank" rel="noopener noreferrer" class="social-link">
@@ -77,6 +105,7 @@
         </a>
       </section>
 
+      <!-- Footer -->
       <footer class="site-footer">
         <p>&copy; 2026 ShopSmart. All rights reserved.</p>
       </footer>

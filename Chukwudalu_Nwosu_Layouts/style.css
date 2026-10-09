@@ -18,6 +18,44 @@
 
   --nav-height: 72px;
   --contents-width: 220px;
+
+  /* ---------- Theme variables: light theme (default) ----------
+     The page is styled with these theme variables instead of the raw palette
+     colors. The dark theme below redefines the same names, so switching the
+     data-theme attribute (done in script.js) re-colors the whole page. */
+  --bg: var(--pale-slate);
+  --surface: #ffffff;
+  --text: var(--black);
+  --heading: var(--sapphire);
+  --tagline: var(--brick-ember);
+  --nav-bg: var(--black);
+  --nav-text: var(--pale-slate);
+  --accent: var(--golden-bronze);
+  --dot: var(--sapphire);
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: rgba(0, 0, 0, 0.08);
+  --photo-shadow: rgba(0, 0, 0, 0.25);
+
+  color-scheme: light; /* lets the browser match scrollbars to the theme */
+}
+
+/* ---------- Theme variables: dark theme ----------
+   Applied when script.js sets data-theme="dark" on the <html> element. */
+[data-theme="dark"] {
+  --bg: #0d0f12;
+  --surface: #171a1f;
+  --text: var(--pale-slate);
+  --heading: var(--golden-bronze); /* sapphire is too dark on a dark background */
+  --tagline: #e5384a;              /* lightened brick-ember so it stays readable */
+  --nav-bg: var(--black);
+  --nav-text: var(--pale-slate);
+  --accent: var(--golden-bronze);
+  --dot: var(--golden-bronze);
+  --border: rgba(200, 204, 208, 0.14);
+  --shadow: rgba(0, 0, 0, 0.5);
+  --photo-shadow: rgba(0, 0, 0, 0.6);
+
+  color-scheme: dark;
 }
 
 * {
@@ -27,10 +65,11 @@
 }
 
 body {
-  background-color: var(--pale-slate);
-  color: var(--black);
+  background-color: var(--bg);
+  color: var(--text);
   font-family: var(--font-body);
   line-height: 1.7;
+  transition: background-color 0.3s ease, color 0.3s ease; /* fades between themes */
 }
 
 a {
@@ -46,7 +85,8 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 0 2.5rem;
-  background-color: var(--black);
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -56,8 +96,15 @@ a {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.35rem;
-  color: var(--golden-bronze);
+  color: var(--accent);
   letter-spacing: 0.5px;
+}
+
+/* Holds the page links and the theme toggle button side by side */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
 }
 
 .main-nav {
@@ -66,7 +113,7 @@ a {
 }
 
 .main-nav a {
-  color: var(--pale-slate);
+  color: var(--nav-text);
   font-weight: 500;
   padding-bottom: 4px;
   border-bottom: 2px solid transparent;
@@ -75,8 +122,35 @@ a {
 
 .main-nav a:hover,
 .main-nav a.active {
-  color: var(--golden-bronze);
-  border-bottom-color: var(--golden-bronze);
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Theme toggle button (sun/moon icon, switched by script.js) */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--nav-text);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: rotate(15deg);
+}
+
+/* Visible focus ring for keyboard users */
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* ---------- Page layout (navbar + contents sidebar + content) ---------- */
@@ -93,7 +167,7 @@ a {
   top: var(--nav-height);
   height: calc(100vh - var(--nav-height));
   padding: 2.5rem 1.5rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  border-right: 1px solid var(--border);
 }
 
 .contents-sidebar h3 {
@@ -101,7 +175,7 @@ a {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--black);
+  color: var(--text);
   opacity: 0.55;
   margin-bottom: 1.25rem;
 }
@@ -118,7 +192,7 @@ a {
   gap: 0.6rem;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--black);
+  color: var(--text);
   opacity: 0.75;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
@@ -127,14 +201,14 @@ a {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--sapphire);
+  background-color: var(--dot);
   opacity: 0.5;
   flex-shrink: 0;
-  transition: background-color 0.2s ease, opacity 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .contents-nav a:hover {
-  color: var(--sapphire);
+  color: var(--heading);
   opacity: 1;
 }
 
@@ -164,8 +238,8 @@ a {
   margin: 0 auto 1.5rem;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid var(--golden-bronze);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  border: 4px solid var(--accent);
+  box-shadow: 0 4px 14px var(--photo-shadow);
 }
 
 .profile-img {
@@ -180,31 +254,32 @@ a {
 .hero h1 {
   font-family: var(--font-heading);
   font-size: 2.25rem;
-  color: var(--sapphire);
+  color: var(--heading);
   margin-bottom: 0.4rem;
 }
 
 .hero .tagline {
   font-style: italic;
-  color: var(--brick-ember);
+  color: var(--tagline);
   font-weight: 500;
 }
 
 /* ---------- Story blocks (Functionality / Our Story) ---------- */
 
 .story-block {
-  background-color: #ffffff;
+  background-color: var(--surface);
   border-radius: 12px;
   padding: 2rem 2.25rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 10px var(--shadow);
   margin-bottom: 1.75rem;
   scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+  transition: background-color 0.3s ease; /* fades between themes */
 }
 
 .story-block h2 {
   font-family: var(--font-heading);
   font-size: 1.3rem;
-  color: var(--sapphire);
+  color: var(--heading);
   margin-bottom: 0.9rem;
 }
 
@@ -226,7 +301,7 @@ a {
 
 .connect h2 {
   font-family: var(--font-heading);
-  color: var(--black);
+  color: var(--text);
   margin-bottom: 1rem;
 }
 
@@ -258,7 +333,7 @@ a {
 .site-footer {
   text-align: center;
   padding: 2rem 0 0.5rem;
-  color: var(--black);
+  color: var(--text);
   opacity: 0.6;
   font-size: 0.85rem;
   margin-top: auto;
@@ -275,7 +350,7 @@ a {
     position: static;
     height: auto;
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid var(--border);
     padding: 1.5rem;
   }
 
@@ -287,5 +362,18 @@ a {
 
   .content {
     padding: 2rem 1.5rem;
+  }
+
+  /* Tighter navbar spacing so the theme toggle fits on small screens */
+  .top-nav {
+    padding: 0 1.25rem;
+  }
+
+  .nav-actions {
+    gap: 1rem;
+  }
+
+  .main-nav {
+    gap: 1.25rem;
   }
 }
