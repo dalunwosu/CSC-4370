@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up | ShopSmart</title>
+  <meta name="description" content="Create your ShopSmart account.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <!-- Loaded in the head so the saved theme is applied before the page paints -->
+  <script src="js/theme.js"></script>
+</head>
+<body>
+  <header class="top-nav">
+    <a class="brand-name" href="index.html">ShopSmart</a>
+    <div class="nav-actions">
+      <nav class="main-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="login.html">Log in</a>
+        <a href="register.html" class="nav-cta active">Sign up</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="auth-shell">
+    <aside class="auth-aside" aria-hidden="true">
+      <div class="receipt-wrap">
+        <article class="receipt">
+          <div class="receipt-store">YOUR LIST</div>
+          <div class="receipt-meta">5 items, 3 stores nearby</div>
+          <hr class="receipt-rule">
+          <div class="receipt-line"><span>Cheapest</span><span>Walmart</span></div>
+          <div class="receipt-line"><span>Example total</span><span>$17.10</span></div>
+          <hr class="receipt-rule">
+          <div class="receipt-note">Example only</div>
+        </article>
+      </div>
+      <p>Save your list and your brands. We'll do the comparing.</p>
+    </aside>
+    <section class="auth-main">
+      <div class="auth-card">
+        <h1>Create your account</h1>
+        <p class="sub">Save your lists and brand preferences in one place.</p>
+        <div class="social-stack" id="social-stack" hidden>
+          <a class="btn btn-social btn-block" id="google-btn" href="/auth/google" hidden>
+            <img src="images/google-icon.png" alt="" onerror="this.remove()">Continue with Google
+          </a>
+          <a class="btn btn-social btn-block" id="apple-btn" href="/auth/apple" hidden>
+            <img src="images/apple-icon.png" alt="" onerror="this.remove()">Continue with Apple
+          </a>
+        </div>
+        <div class="divider" id="social-divider" hidden>or use your email</div>
+
+        <form action="/register" method="POST" id="register-form">
+          <div class="field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autocomplete="username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_]+" autofocus>
+            <p class="hint">3 to 30 characters: letters, numbers and underscores.</p>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required maxlength="255">
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="password" name="password" autocomplete="new-password" required minlength="8" maxlength="72">
+              <button type="button" class="show-pass" aria-controls="password" aria-pressed="false">Show</button>
+            </div>
+            <div class="meter" id="meter" data-level="0" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <p class="hint" id="meter-text">At least 8 characters.</p>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Create account</button>
+        </form>
+        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+      </div>
+    </section>
+  </main>
+  <script src="js/auth.js"></script>
+</body>
+</html>

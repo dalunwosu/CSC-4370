@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSmart | Know the total before you go</title>
+  <meta name="description" content="Build your grocery list once and see what it costs at every store near you.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <!-- Loaded in the head so the saved theme is applied before the page paints -->
+  <script src="js/theme.js"></script>
+</head>
+<body>
+  <header class="top-nav">
+    <a class="brand-name" href="index.html">ShopSmart</a>
+    <div class="nav-actions">
+      <nav class="main-nav" aria-label="Main">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="login.html">Log in</a>
+        <a href="register.html" class="nav-cta">Sign up</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="home-hero">
+      <div class="home-hero-inner">
+        <div>
+          <h1>Know what your groceries cost before you leave the house.</h1>
+          <p class="lede">Build your list once. ShopSmart checks the stores near you and shows the total at each one.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="register.html">Create account</a>
+            <a class="btn btn-ghost" href="login.html">Log in</a>
+          </div>
+        </div>
+        <div class="receipts">
+          <div class="receipt-row">
+          <div class="receipt-wrap">
+            <article class="receipt" aria-label="KROGER total $18.05">
+              <div class="receipt-store">KROGER</div>
+              <div class="receipt-meta">1.4 mi away</div>
+              <hr class="receipt-rule">
+              <div class="receipt-line"><span>Milk 1 gal</span><span>3.49</span></div><div class="receipt-line"><span>Eggs 12 ct</span><span>2.79</span></div><div class="receipt-line"><span>Wheat bread</span><span>2.49</span></div><div class="receipt-line"><span>Bananas 2 lb</span><span>1.29</span></div><div class="receipt-line"><span>Chicken 2 lb</span><span>8.49</span></div>
+              <hr class="receipt-rule">
+              <div class="receipt-line coupon"><span>Coupons</span><span>-0.50</span></div>
+              <div class="receipt-line receipt-total"><span>TOTAL</span><span>$18.05</span></div>
+              <div class="receipt-note">Coupon applied</div>
+              
+            </article>
+          </div>
+          <div class="receipt-wrap">
+            <article class="receipt" aria-label="WALMART total $17.10">
+              <div class="receipt-store">WALMART</div>
+              <div class="receipt-meta">3.2 mi away</div>
+              <hr class="receipt-rule">
+              <div class="receipt-line"><span>Milk 1 gal</span><span>3.18</span></div><div class="receipt-line"><span>Eggs 12 ct</span><span>2.48</span></div><div class="receipt-line"><span>Wheat bread</span><span>2.28</span></div><div class="receipt-line"><span>Bananas 2 lb</span><span>1.18</span></div><div class="receipt-line"><span>Chicken 2 lb</span><span>7.98</span></div>
+              <hr class="receipt-rule">
+              <div class="receipt-line"><span>Coupons</span><span>0.00</span></div>
+              <div class="receipt-line receipt-total"><span>TOTAL</span><span>$17.10</span></div>
+              <div class="receipt-note">$0.95 less than Kroger</div>
+            </article>
+            <div class="stamp" aria-hidden="true">CHEAPEST</div>
+          </div>
+          <div class="receipt-wrap">
+            <article class="receipt" aria-label="TARGET total $19.55">
+              <div class="receipt-store">TARGET</div>
+              <div class="receipt-meta">2.6 mi away</div>
+              <hr class="receipt-rule">
+              <div class="receipt-line"><span>Milk 1 gal</span><span>3.59</span></div><div class="receipt-line"><span>Eggs 12 ct</span><span>2.89</span></div><div class="receipt-line"><span>Wheat bread</span><span>2.69</span></div><div class="receipt-line"><span>Bananas 2 lb</span><span>1.39</span></div><div class="receipt-line"><span>Chicken 2 lb</span><span>8.99</span></div>
+              <hr class="receipt-rule">
+              <div class="receipt-line"><span>Coupons</span><span>0.00</span></div>
+              <div class="receipt-line receipt-total"><span>TOTAL</span><span>$19.55</span></div>
+              <div class="receipt-note">&nbsp;</div>
+              
+            </article>
+          </div>
+          </div>
+          <p class="receipt-caption">Example basket. Prices are illustrative.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <h2>From list to cheapest store in three steps</h2>
+      <p class="section-sub">You do the setup once. After that, a new list takes a minute.</p>
+      <ol class="steps">
+        <li><h3>Build your list</h3><p>Add what you need and pick the brands you prefer. ShopSmart remembers them next time.</p></li>
+        <li><h3>Choose how far to go</h3><p>Set a radius. ShopSmart finds the stores inside it and checks which ones carry your items.</p></li>
+        <li><h3>Compare the totals</h3><p>See each store's total with discounts applied, then head to the one that costs least.</p></li>
+      </ol>
+    </section>
+
+    <section class="section" id="features">
+      <h2>Built around the way you actually shop</h2>
+      <p class="section-sub">Small things that stop a grocery run from turning into a guessing game.</p>
+      <ul class="feature-list">
+        <li><h3>Per-store totals</h3><p>Your whole list priced at every nearby store, side by side.</p></li>
+        <li><h3>Discounts included</h3><p>Active deals and coupons are counted, so the total matches what you would pay.</p></li>
+        <li><h3>Saved brand preferences</h3><p>Set your brands once and skip re-entering them on every list.</p></li>
+        <li><h3>Swaps for missing items</h3><p>If a store doesn't carry something, ShopSmart suggests a comparable item instead of leaving a gap.</p></li>
+      </ul>
+    </section>
+
+    <section class="cta-band" aria-labelledby="cta-title">
+      <h2 id="cta-title">Ready to see where your list costs least?</h2>
+      <a class="btn btn-primary" href="register.html">Create account</a>
+    </section>
+  </main>
+  <footer class="home-footer"><p>&copy; 2026 ShopSmart. All rights reserved.</p></footer>
+</body>
+</html>

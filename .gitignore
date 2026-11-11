@@ -1,0 +1,8 @@
+# Dependencies (anyone can recreate these with "npm install")
+node_modules/
+
+# Secrets: your real database password lives here
+.env
+
+# Microsoft Office temporary lock files
+~$*

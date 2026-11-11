@@ -1,0 +1,19 @@
+{
+  "name": "node-projects",
+  "version": "1.0.0",
+  "description": "ShopSmart: grocery price comparison with account registration and login",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^18.0.10",
+    "express": "^4.22.3",
+    "express-openid-connect": "^3.4.0",
+    "mysql2": "^3.24.6"
+  }
+}
