@@ -1,15 +1,20 @@
 // server.js - ShopSmart web server: static pages, /register, /login, optional Auth0 (Google / Apple).
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
+const crypto = require('crypto');
 const express = require('express');
+const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const { statusPage } = require('./render');
+const { profileRouter, cleanName } = require('./profile');
 
 const BCRYPT_COST = 12;
 const USERNAME_RE = /^[A-Za-z0-9_]{3,30}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PASSWORD_MIN = 8;
 const PASSWORD_MAX = 72; // bcrypt ignores everything past 72 bytes
+const SESSION_NAME = 'shopsmart.sid';
+const SESSION_HOURS = 1; // how long a login lasts (same as the course example: 1 hour)
 
 // Compared against when the username doesn't exist, so "no such user" and
 // "wrong password" take about the same time and look the same to an attacker.
@@ -47,7 +52,7 @@ async function uniqueUsername(users, seed) {
   return candidate;
 }
 
-function createApp({ users, auth0 = null }) {
+function createApp({ users, auth0 = null, sessionSecret, uploadDir = path.join(__dirname, 'uploads', 'avatars') }) {
   const app = express();
   app.disable('x-powered-by');
   app.use(express.urlencoded({ extended: false }));
@@ -61,10 +66,46 @@ function createApp({ users, auth0 = null }) {
   if (auth0) app.use(auth0.middleware);
 
   app.use(express.static(path.join(__dirname, 'public')));
+
+  // ---- Sessions ----
+  // After a successful login the server remembers who you are in a session. The browser only
+  // holds a random session id in a cookie; the details stay on the server.
+  const secret = sessionSecret || process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
+  if (!sessionSecret && !process.env.SESSION_SECRET) {
+    console.warn('SESSION_SECRET is not set in .env, so everyone is logged out whenever the server restarts.');
+  }
+  app.use(session({
+    name: SESSION_NAME,
+    secret,                     // signs the session id cookie
+    resave: false,              // don't re-save sessions that didn't change
+    saveUninitialized: false,   // don't create sessions for visitors who never log in
+    cookie: {
+      maxAge: SESSION_HOURS * 60 * 60 * 1000,
+      httpOnly: true,           // JavaScript on the page can't read the cookie
+      sameSite: 'lax',          // not sent on cross-site form posts
+      secure: process.env.NODE_ENV === 'production', // true when the site is served over HTTPS
+    },
+  }));
+  // Lets the navbar show Profile / Log out instead of Log in / Sign up.
+  app.use((req, res, next) => { res.locals.loggedIn = !!req.session.userId; next(); });
+
+  // Log someone in: swap to a brand-new session id (stops session fixation) and store who they are.
+  const startSession = (req, user) =>
+    new Promise((resolve, reject) => {
+      req.session.regenerate((err) => {
+        if (err) return reject(err);
+        req.session.userId = user.user_id;
+        req.session.username = user.username;
+        req.session.csrf = crypto.randomBytes(24).toString('hex');
+        req.session.save((e) => (e ? reject(e) : resolve()));
+      });
+    });
+
   app.get('/login', (req, res) => res.redirect('/login.html'));
   app.get('/register', (req, res) => res.redirect('/register.html'));
 
-  const page = (res, status, opts) => res.status(status).type('html').send(statusPage(opts));
+  const page = (res, status, opts) =>
+    res.status(status).type('html').send(statusPage({ ...opts, loggedIn: res.locals.loggedIn }));
   const serverError = (res) =>
     page(res, 503, {
       title: 'Try again',
@@ -131,15 +172,46 @@ function createApp({ users, auth0 = null }) {
       // Social-only accounts have no password_hash, so they can never match here.
       const ok = await bcrypt.compare(password, (user && user.password_hash) || DUMMY_HASH);
       if (!user || !user.password_hash || !ok) return fail();
+      await startSession(req, user);
+      res.locals.loggedIn = true;
       return page(res, 200, {
         title: 'Logged in', heading: 'Welcome back',
         message: `You have logged in successfully, ${user.username}.`, ok: true,
-        links: [{ href: '/index.html', label: 'Go to home' }],
+        links: [{ href: '/profile', label: 'Go to your profile' }, { href: '/index.html', label: 'Go to home' }],
       });
     } catch (err) {
       console.error('login failed:', err);
       return serverError(res);
     }
+  });
+
+  // ---- Profile (only for logged-in people) ----
+  app.use('/profile', profileRouter({ users, uploadDir }));
+
+  // ---- Log out ----
+  // Destroys the server session. Google/Apple users also get logged out of Auth0.
+  app.get('/logout', (req, res) => {
+    const viaAuth0 = !!(auth0 && req.oidc && req.oidc.isAuthenticated());
+    req.session.destroy((err) => {
+      res.clearCookie(SESSION_NAME);
+      if (err) {
+        console.error('logout failed:', err);
+        return page(res, 500, { title: 'Try again', heading: 'We could not log you out', message: 'Please try again.', ok: false, links: [{ href: '/profile', label: 'Back to profile' }] });
+      }
+      if (viaAuth0) return res.redirect('/auth/logout');
+      res.locals.loggedIn = false;
+      return page(res, 200, {
+        title: 'Logged out', heading: 'You have been logged out',
+        message: 'Come back any time.', ok: true,
+        links: [{ href: '/login.html', label: 'Log in' }, { href: '/index.html', label: 'Go to home' }],
+      });
+    });
+  });
+
+  // The static pages ask this so their navbar can match the login state.
+  app.get('/api/me', (req, res) => {
+    res.set('Cache-Control', 'no-store');
+    res.json(req.session.userId ? { loggedIn: true, username: req.session.username } : { loggedIn: false });
   });
 
   // ---- Auth0 (Google / Apple) ----
@@ -177,13 +249,14 @@ function createApp({ users, auth0 = null }) {
       if (!user) {
         const email = (profile.email || `${profile.sub.replace(/[^A-Za-z0-9]/g, '')}@users.noreply.shopsmart`).toLowerCase();
         const username = await uniqueUsername(users, profile.email || profile.name || profile.nickname);
-        user = await users.create({ username, email, auth0Id: profile.sub });
+        user = await users.create({
+          username, email, auth0Id: profile.sub,
+          firstName: cleanName(profile.given_name).value || null,
+          lastName: cleanName(profile.family_name).value || null,
+        });
       }
-      return page(res, 200, {
-        title: 'Signed in', heading: 'Welcome to ShopSmart',
-        message: `You have logged in successfully, ${user.username}.`, ok: true,
-        links: [{ href: '/index.html', label: 'Go to home' }, { href: '/auth/logout', label: 'Log out' }],
-      });
+      await startSession(req, user);
+      return res.redirect('/profile');
     } catch (err) {
       console.error('welcome failed:', err);
       return serverError(res);

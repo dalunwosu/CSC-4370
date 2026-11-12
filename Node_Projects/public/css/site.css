@@ -760,3 +760,98 @@ a {
 
 /* the hidden attribute must win over component display rules */
 [hidden] { display: none !important; }
+
+/* =====================================================================
+   NEW: profile page (shown only after login)
+   ===================================================================== */
+
+.profile-head {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+.profile-head h1 { font-family: var(--font-heading); font-size: 1.9rem; line-height: 1.2; color: var(--heading); }
+.profile-meta { opacity: 0.75; line-height: 1.5; overflow-wrap: anywhere; }
+
+.avatar {
+  width: 104px;
+  height: 104px;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--accent);
+  box-shadow: 0 4px 14px var(--photo-shadow);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar .avatar-img { transform: none; object-position: center; }
+.avatar-initials { font-family: var(--font-heading); font-weight: 700; font-size: 2rem; color: var(--heading); }
+
+.flash {
+  border-radius: 10px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  border: 1.5px solid;
+  background: var(--surface);
+}
+.flash.is-ok { border-color: var(--ok); }
+.flash.is-error { border-color: var(--brick-ember); }
+
+.story-block .hint { font-size: 0.85rem; opacity: 0.7; margin-top: 0.9rem; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1.25rem; }
+.form-grid .form-actions { grid-column: 1 / -1; margin-top: 0.4rem; }
+.form-grid .field { margin-bottom: 0.9rem; }
+.form-grid .btn { padding: 0.8rem 1.5rem; }
+.field select {
+  width: 100%;
+  font: inherit;
+  padding: 0.8rem 1rem;
+  background: var(--input-bg);
+  color: var(--text);
+  border: 1.5px solid var(--input-border);
+  border-radius: 10px;
+}
+.field select:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 30%, transparent); }
+.field input[type="file"] { padding: 0.6rem 0.8rem; }
+
+.brand-list { list-style: none; margin: 1rem 0 1.25rem; }
+.brand-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--border);
+}
+.brand-row:last-child { border-bottom: 1px solid var(--border); }
+.brand-item { font-weight: 600; overflow-wrap: anywhere; }
+.brand-name-text { overflow-wrap: anywhere; }
+.brand-empty { padding: 0.7rem 0; opacity: 0.7; }
+
+.link-btn {
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--heading);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+.link-btn:hover { color: var(--tagline); }
+.link-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.remove-photo { margin-top: 0.5rem; }
+
+@media (max-width: 560px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .profile-head { flex-direction: column; align-items: flex-start; }
+  .brand-row { grid-template-columns: 1fr auto; }
+  .brand-row .brand-name-text { grid-column: 1; grid-row: 2; }
+  .brand-row form { grid-row: 1 / span 2; grid-column: 2; }
+}
